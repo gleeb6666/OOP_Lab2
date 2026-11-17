@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:IndividualWork.Core.ViewModels;assembly=IndividualWork.Core"
+             x:Class="IndividualWork.App.MainPage"
+             x:DataType="vm:MainViewModel">
+
+    <ContentPage.Resources>
+        <Style x:Key="SectionTitle" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Margin" Value="0,10,0,2" />
+        </Style>
+        <Style x:Key="FieldCaption" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="0,4,0,0" />
+        </Style>
+        <Style x:Key="FileName" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="LineBreakMode" Value="MiddleTruncation" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="10,6" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="MinimumHeightRequest" Value="34" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid ColumnDefinitions="340,*" RowDefinitions="*,Auto">
+
+        <!-- Ліва панель: файли, параметри пошуку, дії -->
+        <ScrollView Grid.Column="0" Grid.Row="0">
+            <VerticalStackLayout Padding="14,6,14,14" Spacing="6">
+
+                <Label Text="Файли" Style="{StaticResource SectionTitle}" />
+
+                <Label Text="{Binding XmlFileName, StringFormat='XML: {0}'}" Style="{StaticResource FileName}" />
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
+                    <Button Grid.Column="0" Text="Відкрити XML…" Command="{Binding OpenXmlCommand}" />
+                    <Button Grid.Column="1" Text="XML з Drive…" Command="{Binding OpenXmlFromDriveCommand}" />
+                </Grid>
+
+                <Label Text="{Binding XslFileName, StringFormat='XSL: {0}'}" Style="{StaticResource FileName}" />
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
+                    <Button Grid.Column="0" Text="Відкрити XSL…" Command="{Binding OpenXslCommand}" />
+                    <Button Grid.Column="1" Text="XSL з Drive…" Command="{Binding OpenXslFromDriveCommand}" />
+                </Grid>
+                <Button Text="Зберегти вхідні файли на Drive" Command="{Binding UploadSourcesCommand}" />
+
+                <Label Text="Параметри пошуку" Style="{StaticResource SectionTitle}" />
+
+                <Label Text="Студент (атрибут student)" Style="{StaticResource FieldCaption}" />
+                <Picker ItemsSource="{Binding Students}" SelectedItem="{Binding SelectedStudent, Mode=TwoWay}" />
+
+                <Label Text="Група (атрибут group)" Style="{StaticResource FieldCaption}" />
+                <Picker ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup, Mode=TwoWay}" />
+
+                <Label Text="Ключове слово" Style="{StaticResource FieldCaption}" />
+                <Entry Text="{Binding Keyword, Mode=TwoWay}"
+                       Placeholder="шукати в усіх атрибутах і тексті"
+                       ReturnCommand="{Binding SearchCommand}" />
+
+                <Label Text="Спосіб аналізу" Style="{StaticResource SectionTitle}" />
+                <HorizontalStackLayout Spacing="4" RadioButtonGroup.GroupName="Strategy">
+                    <RadioButton Content="SAX" IsChecked="{Binding IsSaxSelected, Mode=TwoWay}" />
+                    <RadioButton Content="DOM" IsChecked="{Binding IsDomSelected, Mode=TwoWay}" />
+                    <RadioButton Content="LINQ to XML" IsChecked="{Binding IsLinqSelected, Mode=TwoWay}" />
+                </HorizontalStackLayout>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="6" Margin="0,8,0,0">
+                    <Button Grid.Column="0" Text="Пошук" Command="{Binding SearchCommand}" />
+                    <Button Grid.Column="1" Text="Clear" Command="{Binding ClearCommand}" />
+                </Grid>
+
+                <Label Text="Трансформація та збереження" Style="{StaticResource SectionTitle}" />
+                <Button Text="Трансформувати в HTML" Command="{Binding TransformCommand}" />
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
+                    <Button Grid.Column="0" Text="XML на Drive" Command="{Binding SaveXmlToDriveCommand}" />
+                    <Button Grid.Column="1" Text="HTML на Drive" Command="{Binding SaveHtmlToDriveCommand}" />
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="6" Margin="0,12,0,0">
+                    <Button Grid.Column="0" Text="Протокол подій" Command="{Binding ShowLogCommand}" />
+                    <Button Grid.Column="1" Text="Вихід" Command="{Binding ExitCommand}" />
+                </Grid>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Права панель: поле виводу та перегляд HTML -->
+        <Grid Grid.Column="1" Grid.Row="0" RowDefinitions="Auto,*,Auto,*" Padding="6,6,14,8" RowSpacing="4">
+            <Label Grid.Row="0" Text="Результати пошуку" Style="{StaticResource SectionTitle}" />
+            <Border Grid.Row="1" StrokeThickness="1" Stroke="#9AA5B1">
+                <Editor Text="{Binding OutputText, Mode=OneWay}"
+                        IsReadOnly="True"
+                        FontFamily="Consolas"
+                        FontSize="13" />
+            </Border>
+
+            <Label Grid.Row="2" Text="HTML (результат XSL-перетворення)" Style="{StaticResource SectionTitle}" />
+            <Border Grid.Row="3" StrokeThickness="1" Stroke="#9AA5B1" BackgroundColor="White">
+                <WebView>
+                    <WebView.Source>
+                        <HtmlWebViewSource Html="{Binding HtmlPreview}" />
+                    </WebView.Source>
+                </WebView>
+            </Border>
+        </Grid>
+
+        <!-- Рядок стану -->
+        <Label Grid.Row="1" Grid.ColumnSpan="2"
+               Text="{Binding StatusText}"
+               Padding="14,6"
+               FontSize="12"
+               BackgroundColor="{AppThemeBinding Light=#E4E7EB, Dark=#2B2B2B}"
+               LineBreakMode="TailTruncation" />
+    </Grid>
+</ContentPage>

@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- ЛР2, варіант 12: «Індивідуальна робота кафедри зі студентами».
+     Головний вузол пошуку — Work. Обов'язкові атрибути: id, student, group.
+     Необов'язкові: course, status, grade, room, consultationType — тому
+     кількість атрибутів у різних вузлів Work різна. -->
+<IndividualWork faculty="Факультет комп'ютерних наук та кібернетики" department="Кафедра теорії та технології програмування" year="2025/2026">
+
+  <Work id="1" student="Максимов Гліб" group="К-28" course="2" status="виконано" grade="95" room="204">
+    <Teacher position="доцент">Гнатюк Оксана Миколаївна</Teacher>
+    <Topic>Робота з файлами XML: SAX, DOM та LINQ to XML</Topic>
+    <Schedule day="вівторок" time="14:40"/>
+    <Tasks>
+      <Task deadline="2025-10-14" status="виконано">Підготувати XML-файл предметної області</Task>
+      <Task deadline="2025-10-28" status="виконано">Реалізувати пошук трьома способами через шаблон «Стратегія»</Task>
+      <Task deadline="2025-11-11" status="виконано">Написати XSL-перетворення у HTML</Task>
+    </Tasks>
+    <Materials>
+      <Material type="документація" url="https://learn.microsoft.com/dotnet/standard/data/xml/">Документація .NET: обробка XML</Material>
+      <Material type="книга">Гамма Е. та ін. Шаблони проєктування</Material>
+    </Materials>
+    <Questions>
+      <Question date="2025-10-16">
+        <Text>Чим SAX відрізняється від DOM?</Text>
+        <Answer>SAX читає документ потоком і не тримає його в пам'яті, DOM будує повне дерево.</Answer>
+      </Question>
+    </Questions>
+  </Work>
+
+  <Work id="2" student="Коваленко Анна" group="К-28" course="2" status="в роботі">
+    <Teacher position="доцент">Гнатюк Оксана Миколаївна</Teacher>
+    <Topic>Шаблони проєктування: «Фабричний метод» та «Одинак»</Topic>
+    <Schedule day="вівторок" time="16:20"/>
+    <Tasks>
+      <Task deadline="2025-11-04" status="виконано">Описати UML-діаграму шаблону «Фабричний метод»</Task>
+      <Task deadline="2025-11-18" status="в роботі">Реалізувати протоколювання подій через «Одинак»</Task>
+    </Tasks>
+    <Materials>
+      <Material type="стаття" url="https://refactoring.guru/uk/design-patterns/factory-method">Refactoring.Guru: Фабричний метод</Material>
+    </Materials>
+    <Questions>
+      <Question date="2025-11-05">
+        <Text>Чи можна зробити «Одинак» потокобезпечним без блокувань?</Text>
+        <Answer>Так, через Lazy&lt;T&gt; або статичний ініціалізатор.</Answer>
+      </Question>
+      <Question date="2025-11-09">
+        <Text>Чи потрібен окремий клас-творець для кожного формату файлу?</Text>
+      </Question>
+    </Questions>
+  </Work>
+
+  <Work id="3" student="Шевченко Данило" group="К-27" status="прострочено" consultationType="онлайн">
+    <Teacher position="асистент">Бойко Ігор Петрович</Teacher>
+    <Topic>Синтаксичний аналіз арифметичних виразів</Topic>
+    <Schedule day="середа" time="10:35"/>
+    <Tasks>
+      <Task deadline="2025-10-01" status="виконано">Написати лексичний аналізатор</Task>
+      <Task deadline="2025-10-15" status="прострочено">Реалізувати рекурсивний спуск</Task>
+    </Tasks>
+    <Materials>
+      <Material type="відео" url="https://example.edu.ua/lectures/parsing">Запис лекції про рекурсивний спуск</Material>
+    </Materials>
+    <Questions/>
+  </Work>
+
+  <Work id="4" student="Мельник Софія" group="К-27" course="2" status="виконано" grade="88" room="215" consultationType="очно">
+    <Teacher position="асистент">Бойко Ігор Петрович</Teacher>
+    <Topic>Модульне тестування у .NET</Topic>
+    <Schedule day="четвер" time="12:20"/>
+    <Tasks>
+      <Task deadline="2025-09-25" status="виконано">Покрити тестами клас обчислення виразів</Task>
+      <Task deadline="2025-10-09" status="виконано">Налаштувати запуск тестів у GitHub Actions</Task>
+    </Tasks>
+    <Materials>
+      <Material type="документація" url="https://xunit.net/">Документація xUnit</Material>
+      <Material type="стаття">Методичні вказівки кафедри з тестування</Material>
+    </Materials>
+    <Questions>
+      <Question date="2025-09-27">
+        <Text>Скільки тестів достатньо для одного методу?</Text>
+        <Answer>Стільки, щоб покрити типові випадки, межі та помилки.</Answer>
+      </Question>
+    </Questions>
+  </Work>
+
+  <Work id="5" student="Максимов Гліб" group="К-28" course="2" status="в роботі" consultationType="онлайн">
+    <Teacher position="професор">Ткаченко Олена Василівна</Teacher>
+    <Topic>Інтеграція застосунку MAUI з Google Drive</Topic>
+    <Schedule day="п'ятниця" time="09:00"/>
+    <Tasks>
+      <Task deadline="2025-11-07" status="виконано">Налаштувати OAuth-клієнт у Google Cloud</Task>
+      <Task deadline="2025-11-21" status="в роботі">Зберігати відфільтрований фрагмент у форматах XML та HTML</Task>
+    </Tasks>
+    <Materials>
+      <Material type="документація" url="https://developers.google.com/drive/api">Google Drive API</Material>
+    </Materials>
+    <Questions>
+      <Question date="2025-11-08">
+        <Text>Який рівень доступу до Drive обрати?</Text>
+        <Answer>Достатньо drive.file: застосунок бачить лише власні файли.</Answer>
+      </Question>
+    </Questions>
+  </Work>
+
+  <Work id="6" student="Бондаренко Максим" group="К-26">
+    <Teacher position="професор">Ткаченко Олена Василівна</Teacher>
+    <Topic>Архітектурний шаблон MVVM</Topic>
+    <Schedule day="понеділок" time="14:40"/>
+    <Tasks>
+      <Task deadline="2025-12-01" status="в роботі">Розділити подання та логіку в навчальному застосунку</Task>
+    </Tasks>
+    <Materials/>
+    <Questions>
+      <Question date="2025-11-10">
+        <Text>Чому «магічна кнопка» вважається антишаблоном?</Text>
+        <Answer>Бо логіка в обробниках подій змішується з інтерфейсом і не тестується.</Answer>
+      </Question>
+    </Questions>
+  </Work>
+
+  <Work id="7" student="Коваленко Анна" group="К-28" course="2" status="виконано" grade="100">
+    <Teacher position="асистент">Бойко Ігор Петрович</Teacher>
+    <Topic>XSLT: перетворення XML у HTML</Topic>
+    <Schedule day="середа" time="12:20"/>
+    <Tasks>
+      <Task deadline="2025-10-22" status="виконано">Згенерувати HTML-таблицю з XML-документа</Task>
+    </Tasks>
+    <Materials>
+      <Material type="стаття" url="https://www.w3.org/TR/xslt-10/">Специфікація XSLT 1.0</Material>
+      <Material type="книга">Тідвелл Д. XSLT</Material>
+    </Materials>
+    <Questions/>
+  </Work>
+
+  <Work id="8" student="Ткачук Олег" group="К-26" course="2" status="прострочено" room="204">
+    <Teacher position="доцент">Гнатюк Оксана Миколаївна</Teacher>
+    <Topic>Система контролю версій Git</Topic>
+    <Schedule day="четвер" time="16:20"/>
+    <Tasks>
+      <Task deadline="2025-09-18" status="виконано">Створити репозиторій та гілку розробки</Task>
+      <Task deadline="2025-10-02" status="прострочено">Розв'язати конфлікт злиття</Task>
+    </Tasks>
+    <Materials>
+      <Material type="книга" url="https://git-scm.com/book/uk/v2">Pro Git</Material>
+    </Materials>
+    <Questions>
+      <Question date="2025-09-30">
+        <Text>Коли краще rebase, а коли merge?</Text>
+      </Question>
+    </Questions>
+  </Work>
+
+  <Work id="9" student="Мельник Софія" group="К-27" course="2" status="в роботі" grade="70" room="215" consultationType="очно" priority="висока">
+    <Teacher position="професор">Ткаченко Олена Василівна</Teacher>
+    <Topic>Підготовка тез на студентську наукову конференцію</Topic>
+    <Schedule day="п'ятниця" time="10:35"/>
+    <Tasks>
+      <Task deadline="2025-11-14" status="виконано">Зібрати огляд літератури</Task>
+      <Task deadline="2025-11-28" status="в роботі">Оформити тези за шаблоном конференції</Task>
+      <Task deadline="2025-12-05" status="в роботі">Підготувати презентацію доповіді</Task>
+    </Tasks>
+    <Materials>
+      <Material type="документація">Вимоги до оформлення тез</Material>
+    </Materials>
+    <Questions>
+      <Question date="2025-11-15">
+        <Text>Який обсяг тез допустимий?</Text>
+        <Answer>До двох сторінок формату А4.</Answer>
+      </Question>
+    </Questions>
+  </Work>
+
+  <Work id="10" student="Шевченко Данило" group="К-27" course="2" status="виконано" grade="82">
+    <Teacher position="доцент">Гнатюк Оксана Миколаївна</Teacher>
+    <Topic>Об'єктно-орієнтоване проєктування електронної таблиці</Topic>
+    <Schedule day="вівторок" time="10:35"/>
+    <Tasks>
+      <Task deadline="2025-09-30" status="виконано">Спроєктувати модель клітинок і формул</Task>
+      <Task deadline="2025-10-14" status="виконано">Виявляти циклічні посилання</Task>
+    </Tasks>
+    <Materials>
+      <Material type="відео" url="https://example.edu.ua/lectures/oop-design">Запис лекції про принципи SOLID</Material>
+    </Materials>
+    <Questions>
+      <Question date="2025-10-03">
+        <Text>Як знайти цикл у залежностях клітинок?</Text>
+        <Answer>Обходом графа залежностей у глибину.</Answer>
+      </Question>
+    </Questions>
+  </Work>
+
+</IndividualWork>
